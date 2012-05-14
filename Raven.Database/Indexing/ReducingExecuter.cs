@@ -41,11 +41,16 @@ namespace Raven.Database.Indexing
 							log.Debug("No reduce keys found for {0}", indexToWorkOn.IndexName);
 					}
 
+					var watch = System.Diagnostics.Stopwatch.StartNew();
+					
 					new ReduceTask
 					{
 						Index = indexToWorkOn.IndexName,
 						ReduceKeys = reduceKeyAndEtags.Select(x => x.ReduceKey).Distinct().ToArray(),
 					}.Execute(context);
+
+					watch.Stop();
+					Console.WriteLine("Single reduce for a batch of " + reduceKeyAndEtags.Count + " items took " + watch.ElapsedMilliseconds.ToString("#,##0") + "ms");
 				});
 			}
 			finally

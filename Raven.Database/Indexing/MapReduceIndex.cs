@@ -57,11 +57,11 @@ namespace Raven.Database.Indexing
 			var reduceKeysToDelete = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
 			var documentsWrapped = documents.Select(doc =>
 			{
-				var documentId = doc.__document_id;
-				foreach (var reduceKey in actions.MappedResults.DeleteMappedResultsForDocumentId((string)documentId, name))
-				{
-					reduceKeysToDelete.Add(reduceKey);
-				}
+				//var documentId = doc.__document_id;
+				//foreach (var reduceKey in actions.MappedResults.DeleteMappedResultsForDocumentId((string)documentId, name))
+				//{
+				//	reduceKeysToDelete.Add(reduceKey);
+				//}
 				return doc;
 			});
 			var stats = new IndexingWorkStats();
